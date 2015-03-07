@@ -1,0 +1,9 @@
+Cli implementation
+ - list the 10 oldest tasks
+ - allow to progress though newer tasks up until today
+ - allow to view future tasks
+ - implement date functionality
+ - use file ~/.local/putitoff/puititoff.config as the database
+
+Wx implementation
+ - Finish up CLI before bothering with this.
