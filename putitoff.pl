@@ -33,13 +33,28 @@ my $filename = shift;
 	else {
   	print "Creating example file\n";  
   	open($fh, '>', $filename) or die "Can't write to $filename"; 
-  	print $fh "Test 1\nTest 2\nTest 3\n";
+  	print $fh "Test1, 1/2/1987\nTest2, 4/19/1925\nTest3, 01/01/2023\n";
   	close $fh;
   	
 		open($fh, '<', $filename); 
   	print <$fh>;
   	close $fh;
 	}
+}
+
+sub read_db {
+	#read the csv, add each line to a hash.
+	my $filename = shift;
+	my %data = ();
+	
+	open(my $fh, '<', $filename) or die "Could not open '$filename' $!\n";
+
+	while (my $line = <$fh>) {
+		chomp $line;
+		my @fields = split "," , $line;
+	  $data{$fields[0]} = $fields[1];	
+	}
+	return %data;
 }
 
 #######END SECTION##########
@@ -53,4 +68,7 @@ my $dir = "$ENV{HOME}/.local/putitoff/";
 #initalize directory and file if they do not exist.
 init_dir($dir);
 init_file($filename);
+my %data = read_db($filename);
+print "going to print data!\n";
 
+print "Key: $_ and Value: $data{$_}\n" foreach (keys%data);
